@@ -5,7 +5,13 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:showAsAction="withText|ifRoom"
+        android:icon="@drawable/p9"
+        android:title="关注设置">
+        <menu>
+            <item android:id="@+id/sub_menu0"
+                android:title="订阅"/>
+        </menu>
+    </item>
 
 </menu>

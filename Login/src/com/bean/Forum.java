@@ -1,6 +1,9 @@
 package com.bean;
 
-public class Forum {
+import java.io.Serializable;
+
+public class Forum implements Serializable{
+	public  static final long serialVersionUID=1L;
 	private int imageid;
 	private String Title;
 	private String msg;

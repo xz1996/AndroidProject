@@ -16,5 +16,7 @@
     <string name="Sex">性别：</string>
     <string name="register">Register</string>
     <string name="title_activity_forum">ForumActivity</string>
+    <string name="title_activity_users_db">UsersDBActivity</string>
+    <string name="title_activity_update_udb">UpdateUdbActivity</string>
 
 </resources>

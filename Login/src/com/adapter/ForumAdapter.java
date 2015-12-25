@@ -53,7 +53,7 @@ public class ForumAdapter extends BaseAdapter{
 		if(convertView==null)
 		{
 			LayoutInflater inflater=LayoutInflater.from(mContext);
-			convertView=inflater.inflate(R.layout.items, null);
+			convertView=inflater.inflate(R.layout.items, null);//将items.xml文件绑定到convertView
 			image=(ImageView)convertView.findViewById(R.id.imageViewitem1);
 			title=(TextView)convertView.findViewById(R.id.textviewTitle);
 			msg=(TextView)convertView.findViewById(R.id.textviewMsg);
@@ -62,8 +62,9 @@ public class ForumAdapter extends BaseAdapter{
 			dataWrapper=new DataWrapper(image,title,msg,chb);
 			convertView.setTag(dataWrapper);
 		}
-		else
+		else											//显示下一页的内容时
 		{
+			//利用之前的对象，不用重新new
 			dataWrapper=(DataWrapper)convertView.getTag();
 			image=dataWrapper.image;
 			title=dataWrapper.title;
@@ -71,7 +72,7 @@ public class ForumAdapter extends BaseAdapter{
 			chb=dataWrapper.chb;
 		}
 		
-		image.setImageResource(mList.get(position).getImageid());
+		image.setImageResource(mList.get(position).getImageid());	//设置图片
 		title.setText(mList.get(position).getTitle());
 		msg.setText(mList.get(position).getMsg());
 		chb.setChecked(mList.get(position).isCheckStatus());
@@ -92,15 +93,16 @@ public class ForumAdapter extends BaseAdapter{
 				// TODO Auto-generated method stub
 				if(isChecked)
 				{
-					Toast.makeText(mContext,"ѡ��"+title.getText().toString(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext,"选中"+title.getText().toString(), Toast.LENGTH_SHORT).show();
 				}
 				else
 				{
-					Toast.makeText(mContext,"ȡ��ѡ��"+title.getText().toString(), Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext,"取消选中"+title.getText().toString(), Toast.LENGTH_SHORT).show();
 				}
 			}
 			
 		});
+		
 		return convertView;
 		
 	}

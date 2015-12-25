@@ -46,7 +46,7 @@ public class WelcomeActivity extends Activity {
 	public void handle()
 	{
 		
-	    //»ñµÃÇ°Ò»¸öActivityµÄÏûÏ¢
+	    //è·å¾—å‰ä¸€ä¸ªActivityçš„æ¶ˆæ¯
 		Intent intent=getIntent();
 		Bundle bundle=intent.getExtras();
 		TextView username=(TextView)findViewById(R.id.password);
@@ -63,7 +63,7 @@ public class WelcomeActivity extends Activity {
 	    else
 	    	i=0;
 	
-		//Back°´Å¥
+		//BackæŒ‰é’®
 		
 		Button back=(Button)findViewById(R.id.buttonlogin);
 		back.setOnClickListener(new View.OnClickListener() {

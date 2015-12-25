@@ -2,10 +2,16 @@ package com.activity.register;
 
 import java.util.*;
 
+import com.activity.login.LoginActivity;
+import com.adapter.DBAdapter;
+import com.bean.User;
+import com.manager.UserManager;
 import com.test1.login.R;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,44 +20,63 @@ import android.widget.AdapterView.OnItemSelectedListener;
 
 public class RegisterActivity extends Activity {
 
+	private static final String DB_NAME = "MyApp.db";
+	private UserManager um;
+	private User user;
+	
+	DBAdapter dbAdapter = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		
+		dbAdapter = new DBAdapter(RegisterActivity.this,DB_NAME);
+		dbAdapter.open();
+		
 		Spinner spEdu=(Spinner)findViewById(R.id.spinnerEducation);
 		Spinner spSchool=(Spinner)findViewById(R.id.spinnerschool);
 		Spinner spMajor=(Spinner)findViewById(R.id.spinnerSpecialty);
-		
+
+		Button	regButtonYes = (Button)findViewById(R.id.buttonregYes);
+		final EditText regUname = (EditText)findViewById(R.id.regusername);
+		final EditText regPassword = (EditText)findViewById(R.id.regpassword);
+
+		final RadioGroup radioSex = (RadioGroup)findViewById(R.id.radioGroupSex);
+
+		//å¾—åˆ°arrays.xmlé‡Œçš„items
 		String[] schoolItems = getResources().getStringArray(R.array.graduateSchool);
 		
 		String[] majorItems = getResources().getStringArray(R.array.speciality);
 		
 		
-		//½¨Ò»¸ö×Ö·û´®Êı×éÁĞ±í
+		//å»ºä¸€ä¸ªå­—ç¬¦ä¸²æ•°ç»„åˆ—è¡¨
 		List<String> listEdu=new ArrayList<String>();
-		listEdu.add("Ğ¡Ñ§");
-		listEdu.add("³õÖĞ");
-		listEdu.add("¸ßÖĞ");
-		listEdu.add("±¾¿Æ");
-		listEdu.add("Ë¶Ê¿");
-		listEdu.add("²©Ê¿");
+		listEdu.add("å°å­¦");
+		listEdu.add("åˆä¸­");
+		listEdu.add("é«˜ä¸­");
+		listEdu.add("æœ¬ç§‘");
+		listEdu.add("ç¡•å£«");
+		listEdu.add("åšå£«");
 		
-		//½¨Êı×éÊÊÅäÆ÷
-		ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,listEdu);
-		ArrayAdapter<String> schooladapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, schoolItems);
-		ArrayAdapter<String> majoradapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, majorItems);
+		//å»ºæ•°ç»„é€‚é…å™¨
+		ArrayAdapter<String> eduAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item,listEdu);
+		ArrayAdapter<String> schoolAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, schoolItems);
+		ArrayAdapter<String> majorAdapter=new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, majorItems);
 		//adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		
-		//½«Spinner¿Ø¼şºÍÊÊÅäÆ÷°ó¶¨
-		spEdu.setAdapter(adapter);
-		
-		//ÎªSpinnerÉèÖÃ¼àÌıÆ÷
+		//å°†Spinneræ§ä»¶å’Œé€‚é…å™¨ç»‘å®š
+		spEdu.setAdapter(eduAdapter);
+		spSchool.setAdapter(schoolAdapter);
+		spMajor.setAdapter(majorAdapter);
+
+		//ä¸ºSpinnerè®¾ç½®ç›‘å¬å™¨
 		spEdu.setOnItemSelectedListener(new OnItemSelectedListener(){
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(parent.getContext(),"ÒÑÑ¡ÖĞ"+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+				Toast.makeText(parent.getContext(),"å·²é€‰ä¸­"+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -64,7 +89,7 @@ public class RegisterActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(parent.getContext(),"ÒÑÑ¡ÖĞ"+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+				Toast.makeText(parent.getContext(),"å·²é€‰ä¸­"+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
@@ -72,21 +97,58 @@ public class RegisterActivity extends Activity {
 				
 			}});
 		
-		spMajor.setOnItemSelectedListener(new OnItemSelectedListener(){
+		spMajor.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				// TODO Auto-generated method stub
-				Toast.makeText(parent.getContext(),"ÒÑÑ¡ÖĞ"+parent.getItemAtPosition(position).toString(),Toast.LENGTH_SHORT).show();
+				Toast.makeText(parent.getContext(), "å·²é€‰ä¸­" + parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
 			}
+
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 				// TODO Auto-generated method stub
+
+			}
+		});
+
+		//æ³¨å†Œç¡®è®¤æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
+		regButtonYes.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
 				
-			}});
+				String uName = regUname.getText().toString();
+				String uPassword = regPassword.getText().toString();
+				String sex = "M";
+				switch (radioSex.getCheckedRadioButtonId())
+				{
+					case R.id.radioMale:sex = "M";break;
+					case R.id.radioFemale: sex = "W";break;
+				}
+
+				user = new User(uName,uPassword,sex);
+				um = new UserManager(dbAdapter.getDb());
+				if(um.add(user))
+				{
+					Toast.makeText(RegisterActivity.this,"æ³¨å†ŒæˆåŠŸï¼",Toast.LENGTH_SHORT).show();
+					finish();
+				}
+				else
+				{
+					Toast.makeText(RegisterActivity.this,"æ³¨å†Œå¤±è´¥ï¼Œç”¨æˆ·åå·²ç»å­˜åœ¨ï¼ï¼",Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+
 		
 	}
-
+	
+	public void onDestroy()
+	{
+		super.onPause();
+		dbAdapter.close();
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
