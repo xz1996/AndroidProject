@@ -115,8 +115,8 @@ public class LoginActivity extends Activity {
 	public boolean SaveUserInformation(SharedPreferences sharedPreferences)
 	{
 		SharedPreferences.Editor editor = sharedPreferences.edit();
-		editor.putString("UserName",((EditText)findViewById(R.id.UpdatePwd_edit1)).getText().toString());
-		editor.putString("Password",((EditText)findViewById(R.id.UpdatePwd_edit2)).getText().toString());
+		editor.putString("UserName",((EditText)findViewById(R.id.editLoginName)).getText().toString());
+		editor.putString("Password",((EditText)findViewById(R.id.editLoginPwd)).getText().toString());
 
 		//调用commit（）保存修改
 		if(editor.commit())
@@ -128,8 +128,8 @@ public class LoginActivity extends Activity {
 	//从SaveInformation文件中读取用户之前的信息
 	public void ReadInformation(SharedPreferences sharedPreferences)
 	{
-		EditText Uname = (EditText)findViewById(R.id.UpdatePwd_edit1);
-		EditText Pwd = (EditText)findViewById(R.id.UpdatePwd_edit2);
+		EditText Uname = (EditText)findViewById(R.id.editLoginName);
+		EditText Pwd = (EditText)findViewById(R.id.editLoginPwd);
 
 		String name = sharedPreferences.getString("UserName","");
 		String password = sharedPreferences.getString("Password","");
@@ -179,8 +179,8 @@ public class LoginActivity extends Activity {
 				// TODO Auto-generated method stub
 
 				//得到所输入的用户名
-				String username = ((EditText) findViewById(R.id.UpdatePwd_edit1)).getText().toString();
-				String password = ((EditText) findViewById(R.id.UpdatePwd_edit2)).getText().toString();
+				String username = ((EditText) findViewById(R.id.editLoginName)).getText().toString();
+				String password = ((EditText) findViewById(R.id.editLoginPwd)).getText().toString();
 
 				
 				

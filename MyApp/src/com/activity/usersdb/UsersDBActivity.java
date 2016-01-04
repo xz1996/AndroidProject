@@ -4,19 +4,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.activity.forum.DetailActivity;
 import com.activity.forum.ForumActivity;
-import com.activity.register.RegisterActivity;
 import com.adapter.DBAdapter;
 import com.adapter.UsersAdapter;
 import com.bean.Forum;
 import com.bean.User;
 import com.manager.UserManager;
-import com.test1.login.R;
-import com.test1.login.R.id;
-import com.test1.login.R.layout;
-import com.test1.login.R.menu;
-import com.test1.login.UpdateUdbActivity;
+import com.example.myapp.R;
 
 import android.app.Activity;
 import android.content.Intent;

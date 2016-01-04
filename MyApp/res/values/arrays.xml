@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="graduateSchool">
+        <item >重庆大学</item>
+        <item >西南大学</item>
+        <item >重庆理工大学</item>
+    </string-array>
+    
+     <string-array name="speciality">
+        <item >会计学</item>
+        <item >管理学</item>
+        <item >物联网工程</item>
+    </string-array>
+</resources>

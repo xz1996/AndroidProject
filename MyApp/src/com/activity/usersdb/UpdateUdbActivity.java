@@ -1,7 +1,8 @@
-package com.test1.login;
-
-import com.activity.usersdb.UsersDBActivity;
-
+package com.activity.usersdb;
+import com.example.myapp.R;
+import com.example.myapp.R.id;
+import com.example.myapp.R.layout;
+import com.example.myapp.R.menu;
 import com.manager.UserManager;
 
 import android.app.Activity;
@@ -22,8 +23,8 @@ public class UpdateUdbActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_update_udb);
 		
-		final EditText pwd1 = (EditText)findViewById(R.id.editLoginName);
-		final EditText pwd2 = (EditText)findViewById(R.id.editLoginPwd);
+		final EditText pwd1 = (EditText)findViewById(R.id.editUpdatePwd1);
+		final EditText pwd2 = (EditText)findViewById(R.id.editUpdatePwd2);
 		Button bt = (Button)findViewById(R.id.UpdatePwdbt);
 		
 

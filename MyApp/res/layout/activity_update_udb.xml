@@ -7,17 +7,15 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@color/mintcream"
-    tools:context="com.test1.login.UpdateUdbActivity" >
+    tools:context="com.activity.usersdb.UpdateUdbActivity" >
 
     <EditText
-        android:id="@+id/editLoginName"
+        android:id="@+id/editUpdatePwd1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_weight="1"
         android:background="@drawable/textbg"
         android:ems="10"
+        android:inputType="textPassword"
         android:hint="请输入新密码"
         android:textColor="@color/purple"
         android:textColorHint="@color/orchid" >
@@ -26,13 +24,11 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editLoginPwd"
+        android:id="@+id/editUpdatePwd2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editLoginName"
-        android:layout_below="@+id/editLoginName"
+        android:layout_below="@id/editUpdatePwd1"
         android:layout_marginTop="10dp"
-        android:layout_weight="1"
         android:background="@drawable/textbg"
         android:ems="10"
         android:hint="确认输入密码"
@@ -44,8 +40,9 @@
         android:id="@+id/UpdatePwdbt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/editLoginPwd"
-        android:layout_below="@+id/editLoginPwd"
+        android:layout_below="@id/editUpdatePwd2"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
         android:text="Yes" />
 
